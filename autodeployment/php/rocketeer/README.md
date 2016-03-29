@@ -56,8 +56,6 @@ Các files đặt tại thư mục /home/deploy/bin tại server Api:
  - *update_ec2_tags*: Tự update tag của chính instances scale up
  - *scaledup_auto_deploy*: Được thiết lập từ động chạy khi một instance tự scale up sẽ deploy chính nó theo version release (branch) đang được sử dụng ở các server Api khác.
 
-[Autodeployment scripts](https://github.com/tranluan91/autodeployment).
-
 Các file bin ở trên cần được cấp quyền thực thi và được chạy ở bất cứ nơi nào với quyền của user deploy. Ví dụ:
  ```
  chmod 600 /home/deploy/bin/get_env
@@ -113,13 +111,13 @@ Trong file ```hooks.php```:
         'cleanup' => [],
     ],
 ```
-```remote.php```:
+File ```remote.php```:
 ```php
     // The root directory where your applications will be deployed
     // This path *needs* to start at the root, ie. start with a /
     'root_directory' => '/usr/share/nginx/your_project',
 ```
-```scm.php```:
+File ```scm.php```:
 ```php
     // Some code
     // Example: https://github.com/vendor/website.git
