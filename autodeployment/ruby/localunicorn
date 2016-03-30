@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#
+# Name: localunicorn
+# Author: johnny
+# Usage: localunicorn [start|stop|restart|reload|add_worker|remove_worker]
+#
+# This command wraps capistrano3-unicorn gem. All commands available
+# depend on the gem.
+#
+
+cd /home/deploy/ranking_server
+LOCAL_DEPLOY=true DEPLOY_REF=dummy bundle exec cap production unicorn:$1
