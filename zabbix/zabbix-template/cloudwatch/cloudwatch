@@ -1,0 +1,41 @@
+#!/usr/local/rvm/rubies/ruby-2.3.0/bin/ruby
+require 'rubygems'
+ require 'aws-sdk-v1'
+require 'optparse'
+
+params = ARGV.getopts(
+  "",
+  "region:",
+  "service:",
+  "metric:",
+  "dimension_name:",
+  "dimension_value:",
+  "statistics:"
+)
+
+AWS.config({
+  :cloud_watch_endpoint => "monitoring.#{params['region']}.amazonaws.com",
+   :access_key_id => "<USER AWS ID>",
+   :secret_access_key => "<USER AWS PASSWORD>"
+})
+
+metric = AWS::CloudWatch::Metric.new(
+  "AWS/#{params['service']}",
+   params['metric'],
+   :dimensions => [{
+     :name => params['dimension_name'],
+     :value => params['dimension_value']
+   }]
+)
+
+stats = metric.statistics(
+  :start_time => Time.now - 300,
+  :end_time => Time.now,
+  :statistics => [params['statistics']]
+)
+
+last_stats = stats.sort_by{|stat| stat[:timestamp]}.last
+
+exit if last_stats.nil?
+
+puts last_stats[params['statistics'].downcase.to_sym]

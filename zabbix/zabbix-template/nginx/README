@@ -1,0 +1,13 @@
+Monitor Nginx
+Step 1: In API server
+- Enable Nginx Status
+
+location /nginx_status {
+	 auth_basic off;
+         stub_status on;
+         access_log   off;
+	 allow  <IP of your Monitor server>
+         }
+
+Step 2: Import template to Zabbix
+Step 3: Add template to host monitor

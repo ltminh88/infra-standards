@@ -1,0 +1,11 @@
+Monitor Php-fpm
+Step 1: Enable php-fpm status
+pm.status_path = /php-fpm_status
+Step 2: Setting php-fpm
+location /php-fpm_status {
+         auth_basic off;
+	 fastcgi_pass 127.0.0.1:9000;
+	 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	 include fastcgi_params;
+	 }
+Step 3: Add template to host monitor

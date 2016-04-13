@@ -1,0 +1,8 @@
+We will take data from Cloudwatch to Zabbix
+Step 1: Install RVM 
+Step 2: Install awk-sdk-v1 
+Step 3: Copy Script to /etc/zabbix/externalscripts
+Step 4: Open template, change value:
+- Region
+- dimension_value: your database/ELB/ELC name
+Step 5: Check running

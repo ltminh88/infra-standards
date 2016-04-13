@@ -1,0 +1,4 @@
+Monitor Unicorn
+Step 1: Copy unicorn.conf to API server. Folder /etc/zabbix/zabbix_agentd.d/
+Step 2: Import unicorn template to Zabbix
+
