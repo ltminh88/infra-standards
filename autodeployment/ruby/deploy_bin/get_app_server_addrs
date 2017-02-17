@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require "aws-sdk"
-client = AWS::ELB.new region: ENV["AWS_REGION"],
-  access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-  secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+client = AWS::ELB.new region: ENV["S3_REGION"],
+  access_key_id: ENV["S3_KEY"],
+  secret_access_key: ENV["S3_SECRET"]
 elb = client.load_balancers.find{|lb| lb.name == ENV["AWS_ELB_NAME"]}
 puts elb.instances.map{|i| i.public_ip_address}

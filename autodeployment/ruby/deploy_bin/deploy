@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# Author: [Framgia] Johnny, HuyND
+
 function exit_failure() {
   echo "Aborted due to an error: $1"
   exit 1;
 }
 
-SOURCE_CODE_DIR=/home/deploy/ranking_server
+SOURCE_CODE_DIR=/home/deploy/$(echo "$REPO_URL" | grep -o "\/[a-zA-Z0-9_\-]\+\.git" | sed -r "s/^\/|\.git$//g")
 echo "---> Move to $SOURCE_CODE_DIR";\
 cd $SOURCE_CODE_DIR || exit_failure "Move to $SOURCE_CODE_DIR";\
 echo "---> Fetch the codes from git repo";\
