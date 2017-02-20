@@ -1,0 +1,46 @@
+#Ubuntu 14.04
+## Install mysql apt config
+sudo wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
+sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb
+## Install mysql 5.7
+sudo apt-get update
+sudo apt-get install mysql-server mysql-client
+## Check mysql version
+mysql --version
+## Config mysql
+sudo mysql_secure_installation
+
+#Ubuntu 16.04
+## Install mysql
+sudo apt-get update
+sudo apt-get install mysql-server-5.7 mysql-client-5.7
+## Config mysql
+sudo mysql_secure_installation
+
+#Centos 6
+## Using root user
+## Install epel packet
+wget https://dev.mysql.com/get/mysql57-community-release-el6-9.noarch.rpm
+rpm -ivh mysql57-community-release-el6-9.noarch.rpm
+## Install mysql 5.7
+yum install mysql-community-server
+## Config mysql
+/usr/bin/mysql_secure_installation
+## Start/stop mysql
+/etc/init.d/mysql start/stop
+## Auto start service after rebot
+chkconfig --levels 235 mysqld on
+
+#Centos 7
+## Using root user
+## Install epel packet
+wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+rpm -ivh mysql57-community-release-el7-9.noarch.rpm
+## Install mysql 5.7
+yum install mysql-community-server
+## Config mysql
+/usr/bin/mysql_secure_installation
+## Start/stop mysql
+systemctl start/stop mysqld.service
+## Auto start service after rebot
+systemctl enable mysqld.service
