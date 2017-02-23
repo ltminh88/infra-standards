@@ -1,0 +1,33 @@
+####### Ubuntu #######
+# Update
+sudo apt-get update
+
+# Install dependencies
+sudo apt-get install build-essential tcl
+
+# Install Redis fron Repository
+sudo apt-get -y install redis-server
+
+# Start redis
+sudo service redis-server start
+
+###### CentOS ######
+# Install by yum
+wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+rpm -ivh epel-release-6-8.noarch.rpm
+yum -y update
+yum install redis php-pecl-redis
+
+# start redis and enable redis to start on boot
+service redis start
+chkconfig redis on
+
+###### Install PHP redis extension ######
+# Centos
+yum --enablerepo=remi,remi-test install php-redis
+
+# Ubuntu
+sudo apt-get install php5-redis
+
+# Restart web server
+

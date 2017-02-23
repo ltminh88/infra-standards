@@ -1,0 +1,36 @@
+# Ubuntu 14.06
+# Install Ruby with RVM
+
+# Create user deploy for install 
+# check group admin. if not exits, create group
+useradd -d /home/deploy -s /bin/bash -m deploy -G admin
+su - deploy
+
+# Update
+sudo apt-get update
+
+# Install dependencies
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
+
+# Install ruby 2.3.1
+sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+
+# If you install another version, change here example: rvm install 2.3.0
+rvm install 2.3.1
+
+# Install Rails (5.0.1)
+
+# Install nodejs
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Install Rails
+gem install rails -v 5.0.1
+
+# Install npm
+npm -g install npm
+
+

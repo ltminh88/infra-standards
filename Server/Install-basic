@@ -1,7 +1,9 @@
-#Ubuntu
-## Add user and group deploy
-sudo useradd -m -d /home/deploy deploy  -s /bin/bash
-## Update newest
+# Ubuntu 14.04
+# 1. Nginx 1.10
+
 sudo apt-get update
-## Install  fail2ban
-sudo apt-get install fail2ban
+sudo apt-get install nginx
+
+# 2. PHP
+
+
