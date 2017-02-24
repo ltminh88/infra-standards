@@ -5,3 +5,4 @@ sudo useradd -m -d /home/deploy deploy  -s /bin/bash
 sudo apt-get update
 ## Install  fail2ban
 sudo apt-get install fail2ban
+
