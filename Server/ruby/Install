@@ -1,7 +1,7 @@
 # Ubuntu 14.06
 # Install Ruby with RVM
 
-# Create user deploy for install 
+# Create user deploy for install
 # check group admin. if not exits, create group
 useradd -d /home/deploy -s /bin/bash -m deploy -G admin
 su - deploy
@@ -33,4 +33,44 @@ gem install rails -v 5.0.1
 # Install npm
 npm -g install npm
 
+#Install mysql
+sudo apt-get install mysql-server mysql-client libmysqlclient-dev
 
+#Install Redis
+apt-get install redis-server redis-tool
+
+#Install nginx
+apt-get install nginx
+
+# Deploy service
+## Create folder rails_apps
+mkdir -p /usr/local/rails_apps/<Project name>
+## Clone code from source
+git clone <URL>
+## Setup ENV
+	vim /home/deploy/.env
+		export RAILS_ENV=
+		export DEPLOY_BRANCH=
+		export DEVISE_SECRET_KEY=
+		export SECRET_KEY_BASE=
+		export DATABASE_NAME=
+		export DATABASE_HOSTNAME=
+		export DATABASE_USERNAME=
+		export DATABASE_PASSWORD=
+		export REDIS_HOSTNAME=
+		export EMAIL_USERNAME=
+		export EMAIL_PASSWORD=
+		export HOST=
+		export S3_KEY=
+		export S3_SECRET=
+		export S3_BUCKET_NAME=
+		export S3_REGION=
+## Load ENV
+  source ~/.env
+## ENV autoload
+  vim ~/.profile
+##Add this command
+  source $HOME/.env
+
+##Deploy Automation via capistrano + Framgia CI
+Follow this guide:https://github.com/framgia/rails5_skeleton

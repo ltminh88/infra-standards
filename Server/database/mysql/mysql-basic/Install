@@ -4,7 +4,7 @@ sudo wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
 sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb
 ## Install mysql 5.7
 sudo apt-get update
-sudo apt-get install mysql-server mysql-client
+sudo apt-get install mysql-server mysql-client libmysqlclient-dev
 ## Check mysql version
 mysql --version
 ## Config mysql
