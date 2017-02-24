@@ -23,12 +23,15 @@ rvm requirements
 rvm install <version>
 rvm use <version> --default
 
+# Install Rails
+gem install rails -v <version>
+
+# Install bundle
+gem install bundle
+
 # Install nodejs
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs
-
-# Install Rails
-gem install rails -v <version>
 
 # Install npm
 npm -g install npm
