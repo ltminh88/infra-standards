@@ -1,0 +1,86 @@
+DEBIAN_FRONTEND=noninteractive
+locale-gen en_US.UTF-8
+
+# Environment variables
+echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc \
+    && echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc \
+    && echo "export LC_CTYPE=UTF-8" >> ~/.bashrc \
+    && echo "export LANG=en_US.UTF-8" >> ~/.bashrc \
+    && echo "export TERM=xterm" >> ~/.bashrc \
+    && source ~/.bashrc
+
+# Install "software-properties-common" (for the "add-apt-repository")
+apt-get update && apt-get install -y \
+    software-properties-common
+
+# Install Mysql
+echo "mysql-server mysql-server/root_password password root" | debconf-set-selections \
+    && echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections \
+    && apt-get install -y mysql-server
+
+# Install Redis, Nginx, Mongo
+apt-get -y --force-yes install nginx redis-server mongodb supervisor \
+    && mkdir -p /data/db
+
+# Add the "PHP 7" ppa
+add-apt-repository -y \
+    ppa:ondrej/php
+
+# Install PHP-CLI 7, some PHP extentions and some useful Tools with APT
+RUN apt-get update && apt-get install -y --force-yes \
+    php7.1-cli \
+    php7.1-common \
+    php7.1-curl \
+    php7.1-json \
+    php7.1-xml \
+    php7.1-mbstring \
+    php7.1-mcrypt \
+    php7.1-mysql \
+    php7.1-pgsql \
+    php7.1-sqlite \
+    php7.1-sqlite3 \
+    php7.1-zip \
+    php7.1-memcached \
+    php7.1-gd \
+    php7.1-fpm \
+    php7.1-xdebug \
+    php7.1-dev \
+    libcurl4-openssl-dev \
+    libedit-dev \
+    libssl-dev \
+    libxml2-dev \
+    xz-utils \
+    sqlite3 \
+    libsqlite3-dev \
+    git \
+    curl \
+    vim \
+    nano \
+    net-tools \
+    pkg-config \
+    iputils-ping
+
+# remove load xdebug extension (only load on phpunit command)
+sed -i 's/^/;/g' /etc/php/7.1/cli/conf.d/20-xdebug.ini
+
+# Add bin folder of composer to PATH.
+echo "export PATH=${PATH}:/var/www/html/vendor/bin:/root/.composer/vendor/bin" >> ~/.bashrc
+
+# Load xdebug Zend extension with phpunit command
+echo "alias phpunit='php -dzend_extension=xdebug.so /var/www/laravel/vendor/bin/phpunit'" >> ~/.bashrc
+
+# Install mongodb extension
+pecl channel-update pecl.php.net && pecl install mongodb-1.1.9
+echo "extension=mongodb.so" >> /etc/php/7.1/cli/php.ini
+
+# Install Nodejs
+curl -sL https://deb.nodesource.com/setup_7.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g gulp-cli bower eslint babel-eslint eslint-plugin-react yarn
+
+# Install SASS
+apt-get install -y ruby \
+    && gem install sass
+
+# COPY default.conf /etc/nginx/sites-available/default
+# COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
