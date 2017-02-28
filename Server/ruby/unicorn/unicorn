@@ -1,0 +1,57 @@
+#!/bin/sh
+NAME="unicorn"
+USER="deploy"
+APP_DIR="/usr/local/rails_apps/<PJ-Name>/current"
+RAILS_ENV=""
+CONFIG="$APP_DIR/config/unicorn/$RAILS_ENV.rb"
+PID="$APP_DIR/tmp/pids/unicorn.pid"
+CMD="bundle exec unicorn -c $CONFIG -E \$RAILS_ENV -D"
+
+start()
+{
+  f [ -e $PID ]; then
+    echo "$NAME already started";
+    exit 1;
+  fi
+  echo "start $NAME";
+  su - $USER -c "cd $APP_DIR; $CMD"
+}
+
+stop()
+{
+  if [ ! -e $PID ]; then
+    echo "$NAME not started";
+    exit 1;
+  fi
+  echo "stop $NAME";
+  su - $USER -c "kill -QUIT `cat ${PID}`"
+  su - $USER -c "rm -f $PID"
+}
+
+restart()
+{
+  if [ ! -e $PID ]; then
+    echo "$NAME not started";
+    exit 1;
+  fi
+  echo "restart $NAME";
+  kill -USR2 `cat $PID`
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo "Syntax Error: release [start|stop|restart]"
+    ;;
+esac
+
+exit
+

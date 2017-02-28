@@ -1,0 +1,16 @@
+[Unit]
+Description=Unicorn Server
+
+[Service]
+WorkingDirectory=/usr/local/rails_apps/<PJ-NAME>/current
+Environment=RAILS_ENV=<ENV>
+SyslogIdentifier=Unicorn
+RuntimeDirectory=current
+PIDFile=/usr/local/rails_apps/<PJ-NAME>/current/tmp/pids/unicorn.pid
+
+ExecStart=/usr/local/rails_apps/cap/current/bin/unicornup
+ExecStop=/usr/bin/kill -QUIT $MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

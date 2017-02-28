@@ -28,6 +28,3 @@ yum --enablerepo=remi,remi-test install php-redis
 
 # Ubuntu
 sudo apt-get install php5-redis
-
-# Restart web server
-

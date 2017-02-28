@@ -75,5 +75,13 @@ git clone <URL>
 ##Add this command
   source $HOME/.env
 
+## Add file unicorn as service
+```
+Follow: https://github.com/framgia/infra-standards/tree/master/Server/ruby/unicorn
+```
 ##Deploy Automation via capistrano + Framgia CI
+```
 Follow this guide:https://github.com/framgia/rails5_skeleton
+Or
+https://github.com/framgia/infra-standards/tree/master/Automation/ruby
+```
